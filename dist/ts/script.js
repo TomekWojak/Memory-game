@@ -27,6 +27,7 @@ const startGame = () => {
     if (!overlay)
         return;
     overlay.style.display = "none";
+    assignNumbersToCards(cards);
     moveCardsToOneTarget(cards);
     setTimeout(() => {
         placeCardsOnBoard(cards);
@@ -43,6 +44,26 @@ const placeCardsOnBoard = (cardsArr) => {
     cardsArr.forEach((card, index) => {
         card.style.top = shuffledCards[index].top;
         card.style.left = shuffledCards[index].left;
+    });
+};
+const setNumbersRange = () => {
+    let numbers = [];
+    const cards = [...document.querySelectorAll(".card")];
+    let maxNumber = cards.length / 2;
+    for (let i = 1; i <= maxNumber; i++) {
+        numbers.push(i);
+    }
+    return numbers;
+};
+const assignNumbersToCards = (cardsArr) => {
+    const numbers = setNumbersRange();
+    let index = 0;
+    cardsArr.forEach((card) => {
+        card.dataset.match = String(numbers[index]);
+        index++;
+        if (index >= numbers.length) {
+            index = 0;
+        }
     });
 };
 export {};
