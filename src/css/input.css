@@ -6,6 +6,7 @@
 	--card-height: 140px;
 	--transition-duration: 700ms;
 	--zoom: zoom 0.5s ease-in-out forwards;
+	--accent: #3a1f4e;
 }
 
 @keyframes zoom {
