@@ -7,11 +7,13 @@
       "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
       "Courier New", monospace;
+    --color-red-300: oklch(80.8% 0.114 19.571);
     --color-purple-300: oklch(82.7% 0.119 306.383);
     --color-purple-500: oklch(62.7% 0.265 303.9);
     --color-purple-600: oklch(55.8% 0.288 302.321);
     --color-fuchsia-600: oklch(59.1% 0.293 322.896);
     --color-fuchsia-700: oklch(51.8% 0.253 323.949);
+    --color-black: #000;
     --color-white: #fff;
     --spacing: 0.25rem;
     --font-weight-semibold: 600;
@@ -250,9 +252,6 @@
   .w-\[50\%\] {
     width: 50%;
   }
-  .w-\[560px\] {
-    width: 560px;
-  }
   .w-\[600px\] {
     width: 600px;
   }
@@ -278,67 +277,11 @@
     --tw-translate-y: calc(calc(1/2 * 100%) * -1);
     translate: var(--tw-translate-x) var(--tw-translate-y);
   }
-  .rotate-x-50 {
-    --tw-rotate-x: rotateX(50deg);
-    transform: var(--tw-rotate-x,) var(--tw-rotate-y,) var(--tw-rotate-z,) var(--tw-skew-x,) var(--tw-skew-y,);
-  }
-  .rotate-x-180 {
-    --tw-rotate-x: rotateX(180deg);
-    transform: var(--tw-rotate-x,) var(--tw-rotate-y,) var(--tw-rotate-z,) var(--tw-skew-x,) var(--tw-skew-y,);
-  }
   .transform {
     transform: var(--tw-rotate-x,) var(--tw-rotate-y,) var(--tw-rotate-z,) var(--tw-skew-x,) var(--tw-skew-y,);
   }
-  .transform-\[rotate\(\)\] {
-    transform: rotate();
-  }
-  .transform-\[rotate\(50deg\)\] {
-    transform: rotate(50deg);
-  }
-  .transform-\[rotate3d\(0deg\)\] {
-    transform: rotate3d(0deg);
-  }
-  .transform-\[rotate3d\(1\)\] {
-    transform: rotate3d(1);
-  }
-  .transform-\[rotate3d\(1\,1\,1\)\] {
-    transform: rotate3d(1,1,1);
-  }
-  .transform-\[rotate3d\(1\,1\,1\,10deg\)\] {
-    transform: rotate3d(1,1,1,10deg);
-  }
-  .transform-\[rotate3d\] {
-    transform: rotate3d;
-  }
-  .transform-\[rotate32\] {
-    transform: rotate32;
-  }
-  .transform-\[rotateX\(\)\] {
-    transform: rotateX();
-  }
-  .transform-\[rotateX\(10deg\)\] {
-    transform: rotateX(10deg);
-  }
-  .transform-\[rotateX\(12\)\] {
-    transform: rotateX(12);
-  }
-  .transform-\[rotateX\(50deg\)\] {
-    transform: rotateX(50deg);
-  }
-  .transform-\[rotateX\(120deg\)\] {
-    transform: rotateX(120deg);
-  }
-  .transform-\[rotateX\] {
-    transform: rotateX;
-  }
-  .transform-\[rotateY\(50deg\)\] {
-    transform: rotateY(50deg);
-  }
-  .transform-\[rotate\] {
-    transform: rotate;
-  }
-  .transform-gpu {
-    transform: translateZ(0) var(--tw-rotate-x,) var(--tw-rotate-y,) var(--tw-rotate-z,) var(--tw-skew-x,) var(--tw-skew-y,);
+  .animate-\(--zoom\) {
+    animation: var(--zoom);
   }
   .cursor-pointer {
     cursor: pointer;
@@ -390,6 +333,18 @@
     border-color: color-mix(in srgb, #fff 30%, transparent);
     @supports (color: color-mix(in lab, red, red)) {
       border-color: color-mix(in oklab, var(--color-white) 30%, transparent);
+    }
+  }
+  .bg-\[\#2d2d2d\] {
+    background-color: #2d2d2d;
+  }
+  .bg-black {
+    background-color: var(--color-black);
+  }
+  .bg-black\/10 {
+    background-color: color-mix(in srgb, #000 10%, transparent);
+    @supports (color: color-mix(in lab, red, red)) {
+      background-color: color-mix(in oklab, var(--color-black) 10%, transparent);
     }
   }
   .bg-white {
@@ -503,185 +458,20 @@
     transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
     transition-duration: var(--tw-duration, var(--default-transition-duration));
   }
-  .transition-\[top\,left\] {
-    transition-property: top,left;
-    transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
-    transition-duration: var(--tw-duration, var(--default-transition-duration));
-  }
   .transition-all {
     transition-property: all;
     transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
     transition-duration: var(--tw-duration, var(--default-transition-duration));
   }
-  .transition-transform {
-    transition-property: transform, translate, scale, rotate;
-    transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
-    transition-duration: var(--tw-duration, var(--default-transition-duration));
-  }
-  .delay-0 {
-    transition-delay: 0ms;
-  }
-  .delay-9 {
-    transition-delay: 9ms;
-  }
-  .delay-50 {
-    transition-delay: 50ms;
-  }
-  .delay-100 {
-    transition-delay: 100ms;
-  }
-  .delay-150 {
-    transition-delay: 150ms;
-  }
-  .delay-200 {
-    transition-delay: 200ms;
-  }
-  .delay-250 {
-    transition-delay: 250ms;
-  }
-  .delay-300 {
-    transition-delay: 300ms;
-  }
-  .delay-350 {
-    transition-delay: 350ms;
-  }
-  .delay-400 {
-    transition-delay: 400ms;
-  }
-  .delay-450 {
-    transition-delay: 450ms;
-  }
-  .delay-500 {
-    transition-delay: 500ms;
-  }
-  .delay-550 {
-    transition-delay: 550ms;
-  }
-  .delay-600 {
-    transition-delay: 600ms;
-  }
-  .delay-650 {
-    transition-delay: 650ms;
-  }
-  .delay-700 {
-    transition-delay: 700ms;
-  }
-  .delay-750 {
-    transition-delay: 750ms;
-  }
-  .delay-800 {
-    transition-delay: 800ms;
-  }
-  .delay-850 {
-    transition-delay: 850ms;
-  }
-  .delay-900 {
-    transition-delay: 900ms;
-  }
-  .delay-950 {
-    transition-delay: 950ms;
-  }
-  .duration-\(--transition-duration\) {
-    --tw-duration: var(--transition-duration);
-    transition-duration: var(--transition-duration);
-  }
-  .duration-\[left\] {
-    --tw-duration: left;
-    transition-duration: left;
-  }
   .ease-in-out {
     --tw-ease: var(--ease-in-out);
     transition-timing-function: var(--ease-in-out);
   }
-  .\[transition\:transform\] {
-    transition: transform;
-  }
-  .\[transition\:transform_00ms_ease-in-out_0s\,top_var\(--transition-duration\)_ease_950ms\,left_var\(--transition-duration\)_ease_950ms\] {
-    transition: transform 00ms ease-in-out 0s,top var(--transition-duration) ease 950ms,left var(--transition-duration) ease 950ms;
-  }
-  .\[transition\:transform_100ms_ease-in-out_0s\,top_var\(--transition-duration\)_ease_400ms\,left_var\(--transition-duration\)_ease_400ms\] {
-    transition: transform 100ms ease-in-out 0s,top var(--transition-duration) ease 400ms,left var(--transition-duration) ease 400ms;
-  }
-  .\[transition\:transform_100ms_ease-in-out_0s\,top_var\(--transition-duration\)_ease_450ms\,left_var\(--transition-duration\)_ease_450ms\] {
-    transition: transform 100ms ease-in-out 0s,top var(--transition-duration) ease 450ms,left var(--transition-duration) ease 450ms;
-  }
-  .\[transition\:transform_100ms_ease-in-out_0s\,top_var\(--transition-duration\)_ease_500ms\,left_var\(--transition-duration\)_ease_500ms\] {
-    transition: transform 100ms ease-in-out 0s,top var(--transition-duration) ease 500ms,left var(--transition-duration) ease 500ms;
-  }
-  .\[transition\:transform_100ms_ease-in-out_0s\,top_var\(--transition-duration\)_ease_550ms\,left_var\(--transition-duration\)_ease_550ms\] {
-    transition: transform 100ms ease-in-out 0s,top var(--transition-duration) ease 550ms,left var(--transition-duration) ease 550ms;
-  }
-  .\[transition\:transform_100ms_ease-in-out_0s\,top_var\(--transition-duration\)_ease_600ms\,left_var\(--transition-duration\)_ease_600ms\] {
-    transition: transform 100ms ease-in-out 0s,top var(--transition-duration) ease 600ms,left var(--transition-duration) ease 600ms;
-  }
-  .\[transition\:transform_100ms_ease-in-out_0s\,top_var\(--transition-duration\)_ease_650ms\,left_var\(--transition-duration\)_ease_650ms\] {
-    transition: transform 100ms ease-in-out 0s,top var(--transition-duration) ease 650ms,left var(--transition-duration) ease 650ms;
-  }
-  .\[transition\:transform_100ms_ease-in-out_0s\,top_var\(--transition-duration\)_ease_700ms\,left_var\(--transition-duration\)_ease_700ms\] {
-    transition: transform 100ms ease-in-out 0s,top var(--transition-duration) ease 700ms,left var(--transition-duration) ease 700ms;
-  }
-  .\[transition\:transform_100ms_ease-in-out_0s\,top_var\(--transition-duration\)_ease_750ms\,left_var\(--transition-duration\)_ease_750ms\] {
-    transition: transform 100ms ease-in-out 0s,top var(--transition-duration) ease 750ms,left var(--transition-duration) ease 750ms;
-  }
-  .\[transition\:transform_100ms_ease-in-out_0s\,top_var\(--transition-duration\)_ease_800ms\,left_var\(--transition-duration\)_ease_800ms\] {
-    transition: transform 100ms ease-in-out 0s,top var(--transition-duration) ease 800ms,left var(--transition-duration) ease 800ms;
-  }
-  .\[transition\:transform_100ms_ease-in-out_0s\,top_var\(--transition-duration\)_ease_850ms\,left_var\(--transition-duration\)_ease_850ms\] {
-    transition: transform 100ms ease-in-out 0s,top var(--transition-duration) ease 850ms,left var(--transition-duration) ease 850ms;
-  }
-  .\[transition\:transform_100ms_ease-in-out_0s\,top_var\(--transition-duration\)_ease_900ms\,left_var\(--transition-duration\)_ease_900ms\] {
-    transition: transform 100ms ease-in-out 0s,top var(--transition-duration) ease 900ms,left var(--transition-duration) ease 900ms;
-  }
-  .\[transition\:transform_100ms_ease-in-out_0s\,top_var\(--transition-duration\)_ease_950ms\,left_var\(--transition-duration\)_ease_50ms\] {
-    transition: transform 100ms ease-in-out 0s,top var(--transition-duration) ease 950ms,left var(--transition-duration) ease 50ms;
-  }
-  .\[transition\:transform_100ms_ease-in-out_0s\,top_var\(--transition-duration\)_ease_950ms\,left_var\(--transition-duration\)_ease_400ms\] {
-    transition: transform 100ms ease-in-out 0s,top var(--transition-duration) ease 950ms,left var(--transition-duration) ease 400ms;
-  }
-  .\[transition\:transform_100ms_ease-in-out_0s\,top_var\(--transition-duration\)_ease_950ms\,left_var\(--transition-duration\)_ease_450ms\] {
-    transition: transform 100ms ease-in-out 0s,top var(--transition-duration) ease 950ms,left var(--transition-duration) ease 450ms;
-  }
-  .\[transition\:transform_100ms_ease-in-out_0s\,top_var\(--transition-duration\)_ease_950ms\,left_var\(--transition-duration\)_ease_500ms\] {
-    transition: transform 100ms ease-in-out 0s,top var(--transition-duration) ease 950ms,left var(--transition-duration) ease 500ms;
-  }
-  .\[transition\:transform_100ms_ease-in-out_0s\,top_var\(--transition-duration\)_ease_950ms\,left_var\(--transition-duration\)_ease_550ms\] {
-    transition: transform 100ms ease-in-out 0s,top var(--transition-duration) ease 950ms,left var(--transition-duration) ease 550ms;
-  }
-  .\[transition\:transform_100ms_ease-in-out_0s\,top_var\(--transition-duration\)_ease_950ms\,left_var\(--transition-duration\)_ease_600ms\] {
-    transition: transform 100ms ease-in-out 0s,top var(--transition-duration) ease 950ms,left var(--transition-duration) ease 600ms;
-  }
-  .\[transition\:transform_100ms_ease-in-out_0s\,top_var\(--transition-duration\)_ease_950ms\,left_var\(--transition-duration\)_ease_650ms\] {
-    transition: transform 100ms ease-in-out 0s,top var(--transition-duration) ease 950ms,left var(--transition-duration) ease 650ms;
-  }
-  .\[transition\:transform_100ms_ease-in-out_0s\,top_var\(--transition-duration\)_ease_950ms\,left_var\(--transition-duration\)_ease_700ms\] {
-    transition: transform 100ms ease-in-out 0s,top var(--transition-duration) ease 950ms,left var(--transition-duration) ease 700ms;
-  }
-  .\[transition\:transform_100ms_ease-in-out_0s\,top_var\(--transition-duration\)_ease_950ms\,left_var\(--transition-duration\)_ease_750ms\] {
-    transition: transform 100ms ease-in-out 0s,top var(--transition-duration) ease 950ms,left var(--transition-duration) ease 750ms;
-  }
-  .\[transition\:transform_100ms_ease-in-out_0s\,top_var\(--transition-duration\)_ease_950ms\,left_var\(--transition-duration\)_ease_800ms\] {
-    transition: transform 100ms ease-in-out 0s,top var(--transition-duration) ease 950ms,left var(--transition-duration) ease 800ms;
-  }
-  .\[transition\:transform_100ms_ease-in-out_0s\,top_var\(--transition-duration\)_ease_950ms\,left_var\(--transition-duration\)_ease_850ms\] {
-    transition: transform 100ms ease-in-out 0s,top var(--transition-duration) ease 950ms,left var(--transition-duration) ease 850ms;
-  }
-  .\[transition\:transform_100ms_ease-in-out_0s\,top_var\(--transition-duration\)_ease_950ms\,left_var\(--transition-duration\)_ease_900ms\] {
-    transition: transform 100ms ease-in-out 0s,top var(--transition-duration) ease 950ms,left var(--transition-duration) ease 900ms;
-  }
-  .\[transition\:transform_100ms_ease-in-out_0s\,top_var\(--transition-duration\)_ease_950ms\,left_var\(--transition-duration\)_ease_950ms\] {
-    transition: transform 100ms ease-in-out 0s,top var(--transition-duration) ease 950ms,left var(--transition-duration) ease 950ms;
-  }
   .\[transition\:transform_150ms_ease-in-out_0s\,top_var\(--transition-duration\)_ease_0ms\,left_var\(--transition-duration\)_ease_0ms\] {
     transition: transform 150ms ease-in-out 0s,top var(--transition-duration) ease 0ms,left var(--transition-duration) ease 0ms;
   }
-  .\[transition\:transform_150ms_ease-in-out_0s\,top_var\(--transition-duration\)_ease_00ms\,left_var\(--transition-duration\)_ease_00ms\] {
-    transition: transform 150ms ease-in-out 0s,top var(--transition-duration) ease 00ms,left var(--transition-duration) ease 00ms;
-  }
   .\[transition\:transform_150ms_ease-in-out_0s\,top_var\(--transition-duration\)_ease_50ms\,left_var\(--transition-duration\)_ease_50ms\] {
     transition: transform 150ms ease-in-out 0s,top var(--transition-duration) ease 50ms,left var(--transition-duration) ease 50ms;
-  }
-  .\[transition\:transform_150ms_ease-in-out_0s\,top_var\(--transition-duration\)_ease_90ms\,left_var\(--transition-duration\)_ease_90ms\] {
-    transition: transform 150ms ease-in-out 0s,top var(--transition-duration) ease 90ms,left var(--transition-duration) ease 90ms;
   }
   .\[transition\:transform_150ms_ease-in-out_0s\,top_var\(--transition-duration\)_ease_100ms\,left_var\(--transition-duration\)_ease_100ms\] {
     transition: transform 150ms ease-in-out 0s,top var(--transition-duration) ease 100ms,left var(--transition-duration) ease 100ms;
@@ -697,9 +487,6 @@
   }
   .\[transition\:transform_150ms_ease-in-out_0s\,top_var\(--transition-duration\)_ease_300ms\,left_var\(--transition-duration\)_ease_300ms\] {
     transition: transform 150ms ease-in-out 0s,top var(--transition-duration) ease 300ms,left var(--transition-duration) ease 300ms;
-  }
-  .\[transition\:transform_150ms_ease-in-out_0s\,top_var\(--transition-duration\)_ease_340ms\,left_var\(--transition-duration\)_ease_340ms\] {
-    transition: transform 150ms ease-in-out 0s,top var(--transition-duration) ease 340ms,left var(--transition-duration) ease 340ms;
   }
   .\[transition\:transform_150ms_ease-in-out_0s\,top_var\(--transition-duration\)_ease_350ms\,left_var\(--transition-duration\)_ease_350ms\] {
     transition: transform 150ms ease-in-out 0s,top var(--transition-duration) ease 350ms,left var(--transition-duration) ease 350ms;
@@ -734,337 +521,94 @@
   .\[transition\:transform_150ms_ease-in-out_0s\,top_var\(--transition-duration\)_ease_850ms\,left_var\(--transition-duration\)_ease_850ms\] {
     transition: transform 150ms ease-in-out 0s,top var(--transition-duration) ease 850ms,left var(--transition-duration) ease 850ms;
   }
-  .\[transition\:transform_150ms_ease-in-out_0s\,top_var\(--transition-duration\)_ease_900ms\,left_var\(--transition-duration\)_ease_0ms\] {
-    transition: transform 150ms ease-in-out 0s,top var(--transition-duration) ease 900ms,left var(--transition-duration) ease 0ms;
-  }
-  .\[transition\:transform_150ms_ease-in-out_0s\,top_var\(--transition-duration\)_ease_900ms\,left_var\(--transition-duration\)_ease_200ms\] {
-    transition: transform 150ms ease-in-out 0s,top var(--transition-duration) ease 900ms,left var(--transition-duration) ease 200ms;
-  }
-  .\[transition\:transform_150ms_ease-in-out_0s\,top_var\(--transition-duration\)_ease_900ms\,left_var\(--transition-duration\)_ease_250ms\] {
-    transition: transform 150ms ease-in-out 0s,top var(--transition-duration) ease 900ms,left var(--transition-duration) ease 250ms;
-  }
-  .\[transition\:transform_150ms_ease-in-out_0s\,top_var\(--transition-duration\)_ease_900ms\,left_var\(--transition-duration\)_ease_850ms\] {
-    transition: transform 150ms ease-in-out 0s,top var(--transition-duration) ease 900ms,left var(--transition-duration) ease 850ms;
-  }
   .\[transition\:transform_150ms_ease-in-out_0s\,top_var\(--transition-duration\)_ease_900ms\,left_var\(--transition-duration\)_ease_900ms\] {
     transition: transform 150ms ease-in-out 0s,top var(--transition-duration) ease 900ms,left var(--transition-duration) ease 900ms;
-  }
-  .\[transition\:transform_150ms_ease-in-out_0s\,top_var\(--transition-duration\)_ease_900ms\,left_var\(--transition-duration\)_ease_ms\] {
-    transition: transform 150ms ease-in-out 0s,top var(--transition-duration) ease 900ms,left var(--transition-duration) ease ms;
   }
   .\[transition\:transform_150ms_ease-in-out_0s\,top_var\(--transition-duration\)_ease_950ms\,left_var\(--transition-duration\)_ease_950ms\] {
     transition: transform 150ms ease-in-out 0s,top var(--transition-duration) ease 950ms,left var(--transition-duration) ease 950ms;
   }
-  .\[transition\:transform_150ms_ease-in-out_0s\,top_var\(--transition-duration\)_ease_3450ms\,left_var\(--transition-duration\)_ease_3450ms\] {
-    transition: transform 150ms ease-in-out 0s,top var(--transition-duration) ease 3450ms,left var(--transition-duration) ease 3450ms;
-  }
-  .\[transition\:transform_300ms\] {
-    transition: transform 300ms;
-  }
-  .\[transition\:transform_300ms_\] {
-    transition: transform 300ms ;
-  }
-  .\[transition\:transform_300ms_ease-in-out_0s\,\] {
-    transition: transform 300ms ease-in-out 0s,;
-  }
-  .\[transition\:transform_300ms_ease-in-out_0s\,top\] {
-    transition: transform 300ms ease-in-out 0s,top;
-  }
-  .\[transition\:transform_300ms_ease-in-out_0s\,top_--transition-duration\] {
-    transition: transform 300ms ease-in-out 0s,top --transition-duration;
-  }
-  .\[transition\:transform_300ms_ease-in-out_0s\,top_\] {
-    transition: transform 300ms ease-in-out 0s,top ;
-  }
-  .\[transition\:transform_300ms_ease-in-out_0s\,top_left_\(--transition-duration\)_950s\] {
-    transition: transform 300ms ease-in-out 0s,top left (--transition-duration) 950s;
-  }
-  .\[transition\:transform_300ms_ease-in-out_0s\,top_left_\(--transition-duration\)_ease-in-out_0s\] {
-    transition: transform 300ms ease-in-out 0s,top left (--transition-duration) ease-in-out 0s;
-  }
-  .\[transition\:transform_300ms_ease-in-out_0s\,top_left_\(--transition-duration\)_ease-in-out_950s\] {
-    transition: transform 300ms ease-in-out 0s,top left (--transition-duration) ease-in-out 950s;
-  }
-  .\[transition\:transform_300ms_ease-in-out_0s\,top_var\(\)\] {
-    transition: transform 300ms ease-in-out 0s,top var();
-  }
-  .\[transition\:transform_300ms_ease-in-out_0s\,top_var\(--transition-duration\)\] {
-    transition: transform 300ms ease-in-out 0s,top var(--transition-duration);
-  }
-  .\[transition\:transform_300ms_ease-in-out_0s\,top_var\(--transition-duration\)_\] {
-    transition: transform 300ms ease-in-out 0s,top var(--transition-duration) ;
-  }
-  .\[transition\:transform_300ms_ease-in-out_0s\,top_var\(--transition-duration\)_ease\] {
-    transition: transform 300ms ease-in-out 0s,top var(--transition-duration) ease;
-  }
-  .\[transition\:transform_300ms_ease-in-out_0s\,top_var\(--transition-duration\)_ease_950ms\,left\] {
-    transition: transform 300ms ease-in-out 0s,top var(--transition-duration) ease 950ms,left;
-  }
-  .\[transition\:transform_300ms_ease-in-out_0s\,top_var\(--transition-duration\)_ease_950ms\,left_var\(--transition-duration\)_ease_950ms\] {
-    transition: transform 300ms ease-in-out 0s,top var(--transition-duration) ease 950ms,left var(--transition-duration) ease 950ms;
-  }
-  .\[transition\:transform_300ms_ease-in-out_0s\,top_var\(--transition-duration\)_ease_950ms\,top_var\(--transition-duration\)_ease_950ms\] {
-    transition: transform 300ms ease-in-out 0s,top var(--transition-duration) ease 950ms,top var(--transition-duration) ease 950ms;
-  }
-  .\[transition\:transform_300ms_ease-in-out_0s\,top_var\(--transition-duration\)_ease_950ms\] {
-    transition: transform 300ms ease-in-out 0s,top var(--transition-duration) ease 950ms;
-  }
-  .\[transition\:transform_300ms_ease-in-out_0s\,top_var\(--transition-duration\)_ease_\] {
-    transition: transform 300ms ease-in-out 0s,top var(--transition-duration) ease ;
-  }
-  .\[transition\:transform_300ms_ease-in-out_0s\,top_var\(--transition-duration\)_ee\] {
-    transition: transform 300ms ease-in-out 0s,top var(--transition-duration) ee;
-  }
-  .\[transition\:transform_300ms_ease-in-out_0s\,top_var\(--transition-duration\)_linea\] {
-    transition: transform 300ms ease-in-out 0s,top var(--transition-duration) linea;
-  }
-  .\[transition\:transform_300ms_ease-in-out_0s\] {
-    transition: transform 300ms ease-in-out 0s;
-  }
-  .\[transition\:transform_300ms_ease-in-out_\] {
-    transition: transform 300ms ease-in-out ;
-  }
-  .\[transition\:transform_\] {
-    transition: transform ;
-  }
-  .hover\:scale-95 {
-    &:hover {
-      @media (hover: hover) {
-        --tw-scale-x: 95%;
-        --tw-scale-y: 95%;
-        --tw-scale-z: 95%;
-        scale: var(--tw-scale-x) var(--tw-scale-y);
-      }
+  .before\:absolute {
+    &::before {
+      content: var(--tw-content);
+      position: absolute;
     }
   }
-  .hover\:scale-\[1\.03\] {
-    &:hover {
-      @media (hover: hover) {
-        scale: 1.03;
-      }
+  .before\:inset-0 {
+    &::before {
+      content: var(--tw-content);
+      inset: calc(var(--spacing) * 0);
     }
   }
-  .hover\:-rotate-1 {
-    &:hover {
-      @media (hover: hover) {
-        rotate: calc(1deg * -1);
-      }
+  .before\:top-0 {
+    &::before {
+      content: var(--tw-content);
+      top: calc(var(--spacing) * 0);
     }
   }
-  .hover\:rotate-3 {
-    &:hover {
-      @media (hover: hover) {
-        rotate: 3deg;
-      }
+  .before\:left-0 {
+    &::before {
+      content: var(--tw-content);
+      left: calc(var(--spacing) * 0);
     }
   }
-  .hover\:rotate-x-1 {
-    &:hover {
-      @media (hover: hover) {
-        --tw-rotate-x: rotateX(1deg);
-        transform: var(--tw-rotate-x,) var(--tw-rotate-y,) var(--tw-rotate-z,) var(--tw-skew-x,) var(--tw-skew-y,);
-      }
+  .before\:left-\[-0\.5rem\] {
+    &::before {
+      content: var(--tw-content);
+      left: -0.5rem;
     }
   }
-  .hover\:rotate-x-15 {
-    &:hover {
-      @media (hover: hover) {
-        --tw-rotate-x: rotateX(15deg);
-        transform: var(--tw-rotate-x,) var(--tw-rotate-y,) var(--tw-rotate-z,) var(--tw-skew-x,) var(--tw-skew-y,);
-      }
+  .before\:left-\[-1rem\] {
+    &::before {
+      content: var(--tw-content);
+      left: -1rem;
     }
   }
-  .hover\:rotate-x-45 {
-    &:hover {
-      @media (hover: hover) {
-        --tw-rotate-x: rotateX(45deg);
-        transform: var(--tw-rotate-x,) var(--tw-rotate-y,) var(--tw-rotate-z,) var(--tw-skew-x,) var(--tw-skew-y,);
-      }
+  .before\:h-full {
+    &::before {
+      content: var(--tw-content);
+      height: 100%;
     }
   }
-  .hover\:rotate-x-180 {
-    &:hover {
-      @media (hover: hover) {
-        --tw-rotate-x: rotateX(180deg);
-        transform: var(--tw-rotate-x,) var(--tw-rotate-y,) var(--tw-rotate-z,) var(--tw-skew-x,) var(--tw-skew-y,);
-      }
+  .before\:w-2\.5 {
+    &::before {
+      content: var(--tw-content);
+      width: calc(var(--spacing) * 2.5);
     }
   }
-  .hover\:rotate-x-\[15deg\] {
-    &:hover {
-      @media (hover: hover) {
-        --tw-rotate-x: rotateX(15deg);
-        transform: var(--tw-rotate-x,) var(--tw-rotate-y,) var(--tw-rotate-z,) var(--tw-skew-x,) var(--tw-skew-y,);
-      }
+  .before\:w-\[10px\] {
+    &::before {
+      content: var(--tw-content);
+      width: 10px;
     }
   }
-  .hover\:-rotate-y-15 {
-    &:hover {
-      @media (hover: hover) {
-        --tw-rotate-y: rotateY(calc(15deg * -1));
-        transform: var(--tw-rotate-x,) var(--tw-rotate-y,) var(--tw-rotate-z,) var(--tw-skew-x,) var(--tw-skew-y,);
-      }
+  .before\:w-\[40px\] {
+    &::before {
+      content: var(--tw-content);
+      width: 40px;
     }
   }
-  .hover\:rotate-y-15 {
-    &:hover {
-      @media (hover: hover) {
-        --tw-rotate-y: rotateY(15deg);
-        transform: var(--tw-rotate-x,) var(--tw-rotate-y,) var(--tw-rotate-z,) var(--tw-skew-x,) var(--tw-skew-y,);
-      }
+  .before\:bg-\[\#2d2d2d\] {
+    &::before {
+      content: var(--tw-content);
+      background-color: #2d2d2d;
     }
   }
-  .hover\:\[transform\:rotate3d\(1\,1\,1\,5deg\)_rotateX\(15deg\)_rotateY\(-15deg\)\] {
-    &:hover {
-      @media (hover: hover) {
-        transform: rotate3d(1,1,1,5deg) rotateX(15deg) rotateY(-15deg);
-      }
+  .before\:bg-red-300 {
+    &::before {
+      content: var(--tw-content);
+      background-color: var(--color-red-300);
     }
   }
-  .hover\:\[transform\:rotate3d\(1\,1\,1\,5deg\)_rotateX\(15deg\)_rotateY\(-15deg\)_scale\(1\.03\)\] {
-    &:hover {
-      @media (hover: hover) {
-        transform: rotate3d(1,1,1,5deg) rotateX(15deg) rotateY(-15deg) scale(1.03);
-      }
-    }
-  }
-  .hover\:\[transform\:rotate3d\(1\,1\,1\,5deg\)_rotateX\(15deg\)_rotateY\(-55deg\)\] {
-    &:hover {
-      @media (hover: hover) {
-        transform: rotate3d(1,1,1,5deg) rotateX(15deg) rotateY(-55deg);
-      }
-    }
-  }
-  .hover\:\[transform\:rotate3d\(1\,1\,1\,5deg\)_rotateX\(55deg\)_rotateY\(-55deg\)\] {
-    &:hover {
-      @media (hover: hover) {
-        transform: rotate3d(1,1,1,5deg) rotateX(55deg) rotateY(-55deg);
-      }
-    }
-  }
-  .hover\:\[transform\:rotate3d\(1\,1\,1\,10deg\)\] {
-    &:hover {
-      @media (hover: hover) {
-        transform: rotate3d(1,1,1,10deg);
-      }
-    }
-  }
-  .hover\:\[transform\:rotate3d\(1\,1\,1\,15deg\)\] {
-    &:hover {
-      @media (hover: hover) {
-        transform: rotate3d(1,1,1,15deg);
-      }
-    }
-  }
-  .hover\:\[transform\:rotate3d\(1\,1\,1\,15deg\)_rotateX\(15deg\)_rotateY\(-15deg\)\] {
-    &:hover {
-      @media (hover: hover) {
-        transform: rotate3d(1,1,1,15deg) rotateX(15deg) rotateY(-15deg);
-      }
-    }
-  }
-  .hover\:\[transform\:rotate3d\(1\,1\,1\,15deg\)_rotateX\(15deg\)_rotateY\(-55deg\)\] {
-    &:hover {
-      @media (hover: hover) {
-        transform: rotate3d(1,1,1,15deg) rotateX(15deg) rotateY(-55deg);
-      }
-    }
-  }
-  .hover\:\[transform\:rotate3d\(1\,1\,1\,15deg\)_rotateX\(55deg\)_rotateY\(-55deg\)\] {
-    &:hover {
-      @media (hover: hover) {
-        transform: rotate3d(1,1,1,15deg) rotateX(55deg) rotateY(-55deg);
-      }
-    }
-  }
-  .hover\:\[transform\:rotate3d\(1\,1\,1\,55deg\)_rotateX\(15deg\)_rotateY\(-15deg\)\] {
-    &:hover {
-      @media (hover: hover) {
-        transform: rotate3d(1,1,1,55deg) rotateX(15deg) rotateY(-15deg);
-      }
-    }
-  }
-  .hover\:\[transform\:rotate3d\(1\,1\,1\,55deg\)_rotateX\(55deg\)_rotateY\(-55deg\)\] {
-    &:hover {
-      @media (hover: hover) {
-        transform: rotate3d(1,1,1,55deg) rotateX(55deg) rotateY(-55deg);
-      }
-    }
-  }
-  .hover\:transform {
-    &:hover {
-      @media (hover: hover) {
-        transform: var(--tw-rotate-x,) var(--tw-rotate-y,) var(--tw-rotate-z,) var(--tw-skew-x,) var(--tw-skew-y,);
-      }
-    }
-  }
-  .hover\:transform-\[rotate\#d\] {
-    &:hover {
-      @media (hover: hover) {
-        transform: rotate#d;
-      }
-    }
-  }
-  .hover\:transform-\[rotate3d\(\)\] {
-    &:hover {
-      @media (hover: hover) {
-        transform: rotate3d();
-      }
-    }
-  }
-  .hover\:transform-\[rotate3d\(1\,1\,1\)\] {
-    &:hover {
-      @media (hover: hover) {
-        transform: rotate3d(1,1,1);
-      }
-    }
-  }
-  .hover\:transform-\[rotate3d\(1\,1\,1\,5deg\)\] {
-    &:hover {
-      @media (hover: hover) {
-        transform: rotate3d(1,1,1,5deg);
-      }
+  .before\:content-\[\'\'\] {
+    &::before {
+      --tw-content: '';
+      content: var(--tw-content);
     }
   }
   .hover\:transform-\[rotate3d\(1\,1\,1\,5deg\)_rotateX\(15deg\)_rotateY\(-15deg\)\] {
     &:hover {
       @media (hover: hover) {
         transform: rotate3d(1,1,1,5deg) rotateX(15deg) rotateY(-15deg);
-      }
-    }
-  }
-  .hover\:transform-\[rotate3d\(1\,1\,1\,10deg\)\] {
-    &:hover {
-      @media (hover: hover) {
-        transform: rotate3d(1,1,1,10deg);
-      }
-    }
-  }
-  .hover\:transform-\[rotate3d\(1\,1\,1\,15deg\)\] {
-    &:hover {
-      @media (hover: hover) {
-        transform: rotate3d(1,1,1,15deg);
-      }
-    }
-  }
-  .hover\:transform-\[rotate3d\] {
-    &:hover {
-      @media (hover: hover) {
-        transform: rotate3d;
-      }
-    }
-  }
-  .hover\:transform-\[rotateY\(50deg\)\] {
-    &:hover {
-      @media (hover: hover) {
-        transform: rotateY(50deg);
-      }
-    }
-  }
-  .hover\:transform-\[rotate\] {
-    &:hover {
-      @media (hover: hover) {
-        transform: rotate;
       }
     }
   }
@@ -1102,6 +646,18 @@
   --card-gap: 5px;
   --card-height: 140px;
   --transition-duration: 700ms;
+  --zoom: zoom 0.5s ease-in-out forwards;
+}
+@keyframes zoom {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.02);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 @property --tw-translate-x {
   syntax: "*";
@@ -1295,28 +851,14 @@
   syntax: "*";
   inherits: false;
 }
-@property --tw-duration {
-  syntax: "*";
-  inherits: false;
-}
 @property --tw-ease {
   syntax: "*";
   inherits: false;
 }
-@property --tw-scale-x {
+@property --tw-content {
   syntax: "*";
+  initial-value: "";
   inherits: false;
-  initial-value: 1;
-}
-@property --tw-scale-y {
-  syntax: "*";
-  inherits: false;
-  initial-value: 1;
-}
-@property --tw-scale-z {
-  syntax: "*";
-  inherits: false;
-  initial-value: 1;
 }
 @layer properties {
   @supports ((-webkit-hyphens: none) and (not (margin-trim: inline))) or ((-moz-orient: inline) and (not (color:rgb(from red r g b)))) {
@@ -1364,11 +906,8 @@
       --tw-backdrop-opacity: initial;
       --tw-backdrop-saturate: initial;
       --tw-backdrop-sepia: initial;
-      --tw-duration: initial;
       --tw-ease: initial;
-      --tw-scale-x: 1;
-      --tw-scale-y: 1;
-      --tw-scale-z: 1;
+      --tw-content: "";
     }
   }
 }

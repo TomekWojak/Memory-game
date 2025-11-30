@@ -30,7 +30,7 @@ const shuffleCards = (array: CardPosition[]) => {
 	return array;
 };
 
-const startGame = () => {
+const startGame = async () => {
 	const overlay = document.querySelector<HTMLElement>(".start-game");
 	const cards = [...document.querySelectorAll<HTMLElement>(".card")];
 
@@ -40,9 +40,14 @@ const startGame = () => {
 	assignNumbersToCards(cards);
 	moveCardsToOneTarget(cards);
 
-	setTimeout(() => {
-		placeCardsOnBoard(cards);
-	}, 2000);
+	await new Promise((res) => setTimeout(res, 2000));
+	placeCardsOnBoard(cards);
+
+	await new Promise((res) => setTimeout(res, 1500));
+	addAnimation(cards);
+
+	await new Promise((res) => setTimeout(res, 1000));
+	addAnimation(cards);
 };
 
 const moveCardsToOneTarget = (cards: HTMLElement[]) => {
@@ -78,6 +83,16 @@ const assignNumbersToCards = (cardsArr: HTMLElement[]) => {
 
 		if (index >= numbers.length) {
 			index = 0;
+		}
+	});
+};
+const addAnimation = (cardsArr: HTMLElement[]) => {
+	cardsArr.forEach((card) => {
+		let state = card.classList.contains("animate-(--zoom)") ? "remove" : "add";
+		if (state === "add") {
+			card.classList.add("animate-(--zoom)");
+		} else {
+			card.classList.remove("animate-(--zoom)");
 		}
 	});
 };
