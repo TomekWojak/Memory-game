@@ -1,0 +1,8 @@
+@import "tailwindcss";
+
+:root {
+	--card-width: 110px;
+    --card-gap: 5px;
+    --card-height: 140px;
+    --transition-duration: 700ms;
+}

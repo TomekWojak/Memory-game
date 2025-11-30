@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./dist/css/output.css">
+    <script type="module" src="./dist/ts/script.js"></script>
+</head>
+
+<body class="flex min-h-screen justify-center items-center bg-linear-to-br from-[#1b1b1b] to-[#2d2d2d]">
+
+    <div class="game-board flex justify-center items-center w-[600px] aspect-square">
+        <div class="game-board-inside relative w-[calc(5*var(--card-width)+4*var(--card-gap))] 
+            h-[calc(4*var(--card-height)+3*var(--card-gap))]
+            backdrop-blur-xl bg-white/10 border border-white/20 rounded-2xl shadow-2xl">
+
+            <div
+                class="card absolute left-0 top-0 w-(--card-width) h-(--card-height)
+              bg-linear-to-br from-purple-600 to-fuchsia-700
+                border border-purple-300 rounded-xl
+                transition-[top,left,transform] hover:transform-[rotate3d(1,1,1,5deg)_rotateX(15deg)_rotateY(-15deg)] [transition:transform_150ms_ease-in-out_0s,top_var(--transition-duration)_ease_0ms,left_var(--transition-duration)_ease_0ms] hover:shadow-[0_8px_25px_rgba(180,70,255,0.4)] cursor-pointer">
+            </div>
+
+            <div
+                class="card absolute left-[calc(var(--card-width)+var(--card-gap))] top-0 
+                w-(--card-width) h-(--card-height)
+                bg-linear-to-br from-purple-600 to-fuchsia-700
+                border border-purple-300 rounded-xl
+                transition-[top,left,transform] hover:transform-[rotate3d(1,1,1,5deg)_rotateX(15deg)_rotateY(-15deg)] [transition:transform_150ms_ease-in-out_0s,top_var(--transition-duration)_ease_50ms,left_var(--transition-duration)_ease_50ms] hover:shadow-[0_8px_25px_rgba(180,70,255,0.4)] cursor-pointer">
+            </div>
+
+            <div
+                class="card absolute left-[calc(2*var(--card-width)+2*var(--card-gap))] top-0
+                w-(--card-width) h-(--card-height)
+                bg-linear-to-br from-purple-600 to-fuchsia-700
+                border border-purple-300 rounded-xl
+                transition-[top,left,transform] hover:transform-[rotate3d(1,1,1,5deg)_rotateX(15deg)_rotateY(-15deg)] [transition:transform_150ms_ease-in-out_0s,top_var(--transition-duration)_ease_100ms,left_var(--transition-duration)_ease_100ms] hover:shadow-[0_8px_25px_rgba(180,70,255,0.4)] cursor-pointer">
+            </div>
+
+            <div
+                class="card absolute left-[calc(3*var(--card-width)+3*var(--card-gap))] top-0
+                w-(--card-width) h-(--card-height)
+                bg-linear-to-br from-purple-600 to-fuchsia-700
+                border border-purple-300 rounded-xl
+                transition-[top,left,transform] hover:transform-[rotate3d(1,1,1,5deg)_rotateX(15deg)_rotateY(-15deg)] [transition:transform_150ms_ease-in-out_0s,top_var(--transition-duration)_ease_150ms,left_var(--transition-duration)_ease_150ms] hover:shadow-[0_8px_25px_rgba(180,70,255,0.4)] cursor-pointer">
+            </div>
+
+            <div
+                class="card absolute left-[calc(4*var(--card-width)+4*var(--card-gap))] top-0
+                w-(--card-width) h-(--card-height)
+                bg-linear-to-br from-purple-600 to-fuchsia-700
+                border border-purple-300 rounded-xl
+                transition-[top,left,transform] hover:transform-[rotate3d(1,1,1,5deg)_rotateX(15deg)_rotateY(-15deg)] [transition:transform_150ms_ease-in-out_0s,top_var(--transition-duration)_ease_200ms,left_var(--transition-duration)_ease_200ms]">
+            </div>
+
+            <div
+                class="card absolute left-0 top-[calc(var(--card-height)+var(--card-gap))]
+                w-(--card-width) h-(--card-height)
+                bg-linear-to-br from-purple-600 to-fuchsia-700
+                border border-purple-300 rounded-xl
+                transition-[top,left,transform] hover:transform-[rotate3d(1,1,1,5deg)_rotateX(15deg)_rotateY(-15deg)] [transition:transform_150ms_ease-in-out_0s,top_var(--transition-duration)_ease_250ms,left_var(--transition-duration)_ease_250ms] hover:shadow-[0_8px_25px_rgba(180,70,255,0.4)] cursor-pointer">
+            </div>
+
+            <div
+                class="card absolute left-[calc(var(--card-width)+var(--card-gap))] 
+                top-[calc(var(--card-height)+var(--card-gap))]
+                w-(--card-width) h-(--card-height)
+                bg-linear-to-br from-purple-600 to-fuchsia-700
+                border border-purple-300  rounded-xl
+                transition-[top,left,transform] hover:transform-[rotate3d(1,1,1,5deg)_rotateX(15deg)_rotateY(-15deg)] [transition:transform_150ms_ease-in-out_0s,top_var(--transition-duration)_ease_300ms,left_var(--transition-duration)_ease_300ms] hover:shadow-[0_8px_25px_rgba(180,70,255,0.4)] cursor-pointer">
+            </div>
+
+            <div
+                class="card absolute left-[calc(2*var(--card-width)+2*var(--card-gap))]
+                top-[calc(var(--card-height)+var(--card-gap))]
+                w-(--card-width) h-(--card-height)
+                bg-linear-to-br from-purple-600 to-fuchsia-700
+                border border-purple-300 rounded-xl
+                transition-[top,left,transform] hover:transform-[rotate3d(1,1,1,5deg)_rotateX(15deg)_rotateY(-15deg)] [transition:transform_150ms_ease-in-out_0s,top_var(--transition-duration)_ease_350ms,left_var(--transition-duration)_ease_350ms] hover:shadow-[0_8px_25px_rgba(180,70,255,0.4)] cursor-pointer">
+            </div>
+
+            <div
+                class="card absolute left-[calc(3*var(--card-width)+3*var(--card-gap))]
+                top-[calc(var(--card-height)+var(--card-gap))]
+                w-(--card-width) h-(--card-height)
+                bg-linear-to-br from-purple-600 to-fuchsia-700
+                border border-purple-300 rounded-xl
+                transition-[top,left,transform] hover:transform-[rotate3d(1,1,1,5deg)_rotateX(15deg)_rotateY(-15deg)] [transition:transform_150ms_ease-in-out_0s,top_var(--transition-duration)_ease_400ms,left_var(--transition-duration)_ease_400ms] hover:shadow-[0_8px_25px_rgba(180,70,255,0.4)] cursor-pointer">
+            </div>
+
+            <div
+                class="card absolute left-[calc(4*var(--card-width)+4*var(--card-gap))]
+                top-[calc(var(--card-height)+var(--card-gap))]
+                w-(--card-width) h-(--card-height)
+                bg-linear-to-br from-purple-600 to-fuchsia-700
+                border border-purple-300 rounded-xl
+                transition-[top,left,transform] hover:transform-[rotate3d(1,1,1,5deg)_rotateX(15deg)_rotateY(-15deg)] [transition:transform_150ms_ease-in-out_0s,top_var(--transition-duration)_ease_450ms,left_var(--transition-duration)_ease_450ms] hover:shadow-[0_8px_25px_rgba(180,70,255,0.4)] cursor-pointer">
+            </div>
+
+
+            <div
+                class="card absolute left-0 top-[calc(2*var(--card-height)+2*var(--card-gap))]
+                w-(--card-width) h-(--card-height)
+                bg-linear-to-br from-purple-600 to-fuchsia-700
+                border border-purple-300 rounded-xl
+                transition-[top,left,transform] hover:transform-[rotate3d(1,1,1,5deg)_rotateX(15deg)_rotateY(-15deg)] [transition:transform_150ms_ease-in-out_0s,top_var(--transition-duration)_ease_500ms,left_var(--transition-duration)_ease_500ms] hover:shadow-[0_8px_25px_rgba(180,70,255,0.4)] cursor-pointer">
+            </div>
+
+            <div
+                class="card absolute left-[calc(var(--card-width)+var(--card-gap))]
+                top-[calc(2*var(--card-height)+2*var(--card-gap))]
+                w-(--card-width) h-(--card-height)
+                bg-linear-to-br from-purple-600 to-fuchsia-700
+                border border-purple-300 rounded-xl
+               transition-[top,left,transform] hover:transform-[rotate3d(1,1,1,5deg)_rotateX(15deg)_rotateY(-15deg)] [transition:transform_150ms_ease-in-out_0s,top_var(--transition-duration)_ease_550ms,left_var(--transition-duration)_ease_550ms] hover:shadow-[0_8px_25px_rgba(180,70,255,0.4)] cursor-pointer">
+            </div>
+
+            <div
+                class="card absolute left-[calc(2*var(--card-width)+2*var(--card-gap))]
+                top-[calc(2*var(--card-height)+2*var(--card-gap))]
+                w-(--card-width) h-(--card-height)
+                bg-linear-to-br from-purple-600 to-fuchsia-700
+                border border-purple-300 rounded-xl
+                transition-[top,left,transform] hover:transform-[rotate3d(1,1,1,5deg)_rotateX(15deg)_rotateY(-15deg)] [transition:transform_150ms_ease-in-out_0s,top_var(--transition-duration)_ease_600ms,left_var(--transition-duration)_ease_600ms] hover:shadow-[0_8px_25px_rgba(180,70,255,0.4)] cursor-pointer">
+            </div>
+
+            <div
+                class="card absolute left-[calc(3*var(--card-width)+3*var(--card-gap))]
+                top-[calc(2*var(--card-height)+2*var(--card-gap))]
+                w-(--card-width) h-(--card-height)
+                bg-linear-to-br from-purple-600 to-fuchsia-700
+                border border-purple-300 rounded-xl
+                transition-[top,left,transform] hover:transform-[rotate3d(1,1,1,5deg)_rotateX(15deg)_rotateY(-15deg)] [transition:transform_150ms_ease-in-out_0s,top_var(--transition-duration)_ease_650ms,left_var(--transition-duration)_ease_650ms] hover:shadow-[0_8px_25px_rgba(180,70,255,0.4)] cursor-pointer">
+            </div>
+
+            <div
+                class="card absolute left-[calc(4*var(--card-width)+4*var(--card-gap))]
+                top-[calc(2*var(--card-height)+2*var(--card-gap))]
+                w-(--card-width) h-(--card-height)
+                bg-linear-to-br from-purple-600 to-fuchsia-700
+                border border-purple-300 rounded-xl
+                transition-[top,left,transform] hover:transform-[rotate3d(1,1,1,5deg)_rotateX(15deg)_rotateY(-15deg)] [transition:transform_150ms_ease-in-out_0s,top_var(--transition-duration)_ease_700ms,left_var(--transition-duration)_ease_700ms] hover:shadow-[0_8px_25px_rgba(180,70,255,0.4)] cursor-pointer">
+            </div>
+
+
+            <div
+                class="card absolute left-0 top-[calc(3*var(--card-height)+3*var(--card-gap))]
+                w-(--card-width) h-(--card-height)
+                bg-linear-to-br from-purple-600 to-fuchsia-700
+                border border-purple-300 rounded-xl
+                transition-[top,left,transform] hover:transform-[rotate3d(1,1,1,5deg)_rotateX(15deg)_rotateY(-15deg)] [transition:transform_150ms_ease-in-out_0s,top_var(--transition-duration)_ease_750ms,left_var(--transition-duration)_ease_750ms] hover:shadow-[0_8px_25px_rgba(180,70,255,0.4)] cursor-pointer">
+            </div>
+
+            <div
+                class="card absolute left-[calc(var(--card-width)+var(--card-gap))]
+                top-[calc(3*var(--card-height)+3*var(--card-gap))]
+                w-(--card-width) h-(--card-height)
+                bg-linear-to-br from-purple-600 to-fuchsia-700
+                border border-purple-300 rounded-xl
+                transition-[top,left,transform] hover:transform-[rotate3d(1,1,1,5deg)_rotateX(15deg)_rotateY(-15deg)] [transition:transform_150ms_ease-in-out_0s,top_var(--transition-duration)_ease_800ms,left_var(--transition-duration)_ease_800ms] hover:shadow-[0_8px_25px_rgba(180,70,255,0.4)] cursor-pointer">
+            </div>
+
+            <div
+                class="card absolute left-[calc(2*var(--card-width)+2*var(--card-gap))]
+                top-[calc(3*var(--card-height)+3*var(--card-gap))]
+                w-(--card-width) h-(--card-height)
+                bg-linear-to-br from-purple-600 to-fuchsia-700
+                border border-purple-300 rounded-xl
+                transition-[top,left,transform] hover:transform-[rotate3d(1,1,1,5deg)_rotateX(15deg)_rotateY(-15deg)] [transition:transform_150ms_ease-in-out_0s,top_var(--transition-duration)_ease_850ms,left_var(--transition-duration)_ease_850ms] hover:shadow-[0_8px_25px_rgba(180,70,255,0.4)] cursor-pointer">
+            </div>
+
+            <div class="card absolute left-[calc(3*var(--card-width)+3*var(--card-gap))]
+                top-[calc(3*var(--card-height)+3*var(--card-gap))]
+                w-(--card-width) h-(--card-height)
+                bg-linear-to-br from-purple-600 to-fuchsia-700
+                border border-purple-300 rounded-xl
+               transition-[top,left,transform] hover:transform-[rotate3d(1,1,1,5deg)_rotateX(15deg)_rotateY(-15deg)] [transition:transform_150ms_ease-in-out_0s,top_var(--transition-duration)_ease_900ms,left_var(--transition-duration)_ease_900ms] 
+                 hover:shadow-[0_8px_25px_rgba(180,70,255,0.4)] cursor-pointer"></div>
+
+            <div class="card absolute left-[calc(4*var(--card-width)+4*var(--card-gap))]
+                top-[calc(3*var(--card-height)+3*var(--card-gap))]
+                w-(--card-width) h-(--card-height)
+                bg-linear-to-br from-purple-600 to-fuchsia-700
+                border border-purple-300 rounded-xl
+                transition-[top,left,transform] hover:transform-[rotate3d(1,1,1,5deg)_rotateX(15deg)_rotateY(-15deg)] [transition:transform_150ms_ease-in-out_0s,top_var(--transition-duration)_ease_950ms,left_var(--transition-duration)_ease_950ms] 
+                 hover:shadow-[0_8px_25px_rgba(180,70,255,0.4)] cursor-pointer"></div>
+
+        </div>
+    </div>
+
+    <div class="start-game absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 
+        w-[50%] h-[30%] grid place-items-center
+        bg-linear-to-br from-purple-500/30 to-fuchsia-600/30
+    backdrop-blur-xl border border-purple-300/40 shadow-xl rounded-3xl">
+
+        <button class="start-game-button bg-white/20 backdrop-blur-xl border border-white/30
+            text-white px-6 py-3 rounded-xl font-semibold
+            hover:bg-white/30 hover:border-white/40 transition-all shadow-lg">
+            Start Game
+        </button>
+    </div>
+
+</body>
+
+
+</html>

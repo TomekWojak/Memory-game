@@ -1,0 +1,17 @@
+{
+	"dependencies": {
+		"@tailwindcss/cli": "^4.1.17",
+		"tailwindcss": "^4.1.17",
+		"typescript": "^5.9.3"
+	},
+	"name": "memory-game",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"watch": "@tailwindcss -i ./src/css/input.css -o ./dist/css/output.css --watch"
+	},
+	"keywords": [],
+	"author": "Tomasz Wojak",
+	"license": "ISC"
+}
