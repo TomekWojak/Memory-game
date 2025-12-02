@@ -1,15 +1,21 @@
-const cards = [...document.querySelectorAll(".card")].map((card) => {
-    return {
-        top: getComputedStyle(card).top,
-        left: getComputedStyle(card).left,
-    };
-});
+import { pause } from "./helpers.js";
+const getCardsPositions = () => {
+    const cards = [...document.querySelectorAll(".card")].map((card) => {
+        return {
+            top: getComputedStyle(card).top,
+            left: getComputedStyle(card).left,
+        };
+    });
+    return cards;
+};
 document.addEventListener("DOMContentLoaded", function () {
-    const startButton = document.querySelector(".start-game-button");
+    const startButton = document.querySelector(".start-game-btn");
+    const cards = [...document.querySelectorAll(".card")];
+    const positions = getCardsPositions();
     if (!startButton)
         return;
     startButton.addEventListener("click", () => {
-        startGame();
+        startGame(positions, cards);
     });
 });
 const shuffleCards = (array) => {
@@ -21,19 +27,15 @@ const shuffleCards = (array) => {
     }
     return array;
 };
-const startGame = async () => {
-    const overlay = document.querySelector(".start-game");
-    const cards = [...document.querySelectorAll(".card")];
-    if (!overlay)
-        return;
-    overlay.style.display = "none";
+const startGame = async (positions, cardsArr) => {
+    const cards = cardsArr;
     assignNumbersToCards(cards);
     moveCardsToOneTarget(cards);
-    await new Promise((res) => setTimeout(res, 2000));
-    placeCardsOnBoard(cards);
-    await new Promise((res) => setTimeout(res, 1500));
+    await pause(2000);
+    placeCardsOnBoard(cards, positions);
+    await pause(1500);
     addAnimation(cards);
-    await new Promise((res) => setTimeout(res, 1000));
+    await pause(1000);
     addAnimation(cards);
 };
 const moveCardsToOneTarget = (cards) => {
@@ -42,24 +44,23 @@ const moveCardsToOneTarget = (cards) => {
         card.style.left = "225px";
     });
 };
-const placeCardsOnBoard = (cardsArr) => {
-    const shuffledCards = shuffleCards(cards);
+const placeCardsOnBoard = (cardsArr, positions) => {
+    const shuffledCards = shuffleCards(positions);
     cardsArr.forEach((card, index) => {
         card.style.top = shuffledCards[index].top;
         card.style.left = shuffledCards[index].left;
     });
 };
-const setNumbersRange = () => {
+const setNumbersRange = (cardsArr) => {
     let numbers = [];
-    const cards = [...document.querySelectorAll(".card")];
-    let maxNumber = cards.length / 2;
+    let maxNumber = cardsArr.length / 2;
     for (let i = 1; i <= maxNumber; i++) {
         numbers.push(i);
     }
     return numbers;
 };
 const assignNumbersToCards = (cardsArr) => {
-    const numbers = setNumbersRange();
+    const numbers = setNumbersRange(cardsArr);
     let index = 0;
     cardsArr.forEach((card) => {
         card.dataset.match = String(numbers[index]);
@@ -71,13 +72,6 @@ const assignNumbersToCards = (cardsArr) => {
 };
 const addAnimation = (cardsArr) => {
     cardsArr.forEach((card) => {
-        let state = card.classList.contains("animate-(--zoom)") ? "remove" : "add";
-        if (state === "add") {
-            card.classList.add("animate-(--zoom)");
-        }
-        else {
-            card.classList.remove("animate-(--zoom)");
-        }
+        card.classList.toggle("animate-(--zoom)");
     });
 };
-export {};

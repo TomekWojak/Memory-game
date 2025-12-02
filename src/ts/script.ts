@@ -1,22 +1,29 @@
+import { pause } from "./helpers.js";
 interface CardPosition {
 	top: string;
 	left: string;
 }
-const cards = [...document.querySelectorAll<HTMLElement>(".card")].map(
-	(card) => {
-		return {
-			top: getComputedStyle(card).top,
-			left: getComputedStyle(card).left,
-		};
-	}
-);
 
-document.addEventListener("DOMContentLoaded", function () {
-	const startButton = document.querySelector<HTMLElement>(".start-game-button");
+const getCardsPositions = (): CardPosition[] => {
+	const cards = [...document.querySelectorAll<HTMLElement>(".card")].map(
+		(card) => {
+			return {
+				top: getComputedStyle(card).top,
+				left: getComputedStyle(card).left,
+			};
+		}
+	);
+	return cards;
+};
+
+document.addEventListener("DOMContentLoaded", function (): void {
+	const startButton = document.querySelector<HTMLElement>(".start-game-btn");
+	const cards = [...document.querySelectorAll<HTMLElement>(".card")];
+	const positions = getCardsPositions();
 
 	if (!startButton) return;
 	startButton.addEventListener("click", () => {
-		startGame();
+		startGame(positions, cards);
 	});
 });
 
@@ -30,23 +37,22 @@ const shuffleCards = (array: CardPosition[]) => {
 	return array;
 };
 
-const startGame = async () => {
-	const overlay = document.querySelector<HTMLElement>(".start-game");
-	const cards = [...document.querySelectorAll<HTMLElement>(".card")];
-
-	if (!overlay) return;
-	overlay.style.display = "none";
+const startGame = async (
+	positions: CardPosition[],
+	cardsArr: HTMLElement[]
+) => {
+	const cards = cardsArr;
 
 	assignNumbersToCards(cards);
 	moveCardsToOneTarget(cards);
 
-	await new Promise((res) => setTimeout(res, 2000));
-	placeCardsOnBoard(cards);
+	await pause(2000);
+	placeCardsOnBoard(cards, positions);
 
-	await new Promise((res) => setTimeout(res, 1500));
+	await pause(1500);
 	addAnimation(cards);
 
-	await new Promise((res) => setTimeout(res, 1000));
+	await pause(1000);
 	addAnimation(cards);
 };
 
@@ -56,25 +62,27 @@ const moveCardsToOneTarget = (cards: HTMLElement[]) => {
 		card.style.left = "225px";
 	});
 };
-const placeCardsOnBoard = (cardsArr: HTMLElement[]) => {
-	const shuffledCards = shuffleCards(cards);
+const placeCardsOnBoard = (
+	cardsArr: HTMLElement[],
+	positions: CardPosition[]
+) => {
+	const shuffledCards = shuffleCards(positions);
 	cardsArr.forEach((card, index) => {
 		card.style.top = shuffledCards[index]!.top;
 		card.style.left = shuffledCards[index]!.left;
 	});
 };
-const setNumbersRange = () => {
+const setNumbersRange = (cardsArr: HTMLElement[]) => {
 	let numbers: number[] = [];
 
-	const cards = [...document.querySelectorAll<HTMLElement>(".card")];
-	let maxNumber = cards.length / 2;
+	let maxNumber = cardsArr.length / 2;
 	for (let i = 1; i <= maxNumber; i++) {
 		numbers.push(i);
 	}
 	return numbers;
 };
 const assignNumbersToCards = (cardsArr: HTMLElement[]) => {
-	const numbers = setNumbersRange();
+	const numbers = setNumbersRange(cardsArr);
 	let index = 0;
 
 	cardsArr.forEach((card) => {
@@ -88,11 +96,6 @@ const assignNumbersToCards = (cardsArr: HTMLElement[]) => {
 };
 const addAnimation = (cardsArr: HTMLElement[]) => {
 	cardsArr.forEach((card) => {
-		let state = card.classList.contains("animate-(--zoom)") ? "remove" : "add";
-		if (state === "add") {
-			card.classList.add("animate-(--zoom)");
-		} else {
-			card.classList.remove("animate-(--zoom)");
-		}
+		card.classList.toggle("animate-(--zoom)");
 	});
 };
