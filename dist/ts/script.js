@@ -1,5 +1,6 @@
 import { pause } from "./helpers.js";
-const TIME_TO_SHOW_CARDS = 1500;
+import { categories } from "./categories.js";
+const TIME_TO_SHOW_CARDS = 500;
 const getCardsPositions = () => {
     const cards = [...document.querySelectorAll(".card")].map((card) => {
         return {
@@ -14,17 +15,16 @@ document.addEventListener("DOMContentLoaded", function () {
     const cards = [...document.querySelectorAll(".card")];
     const positions = getCardsPositions();
     const choosenCards = [];
-    let lastClickedCard;
     if (!startButton)
         return;
     startButton.addEventListener("click", () => {
+        startButton.disabled = true;
         startGame(positions, cards);
     });
     cards.forEach((card) => {
         card.addEventListener("click", () => {
-            if (card === lastClickedCard || choosenCards.length === 2)
+            if (choosenCards.includes(card) || choosenCards.length === 2)
                 return;
-            lastClickedCard = card;
             handleMatch(card, choosenCards);
         });
     });
@@ -48,6 +48,7 @@ const startGame = async (positions, cardsArr) => {
     await pause(1000);
     addAnimation(cards);
     assignNumbersToCards(cards);
+    giveCardsImages(cards);
 };
 const moveCardsToOneTarget = (cards) => {
     cards.forEach((card) => {
@@ -65,7 +66,7 @@ const placeCardsOnBoard = (cardsArr, positions) => {
 const setNumbersRange = (cardsArr) => {
     let numbers = [];
     let maxNumber = cardsArr.length / 2;
-    for (let i = 1; i <= maxNumber; i++) {
+    for (let i = 0; i < maxNumber; i++) {
         numbers.push(i);
     }
     return numbers;
@@ -91,20 +92,21 @@ const showCardBack = (card) => {
 };
 const handleMatch = async (card, choosenCards) => {
     const cardMatchNumber = parseInt(card.dataset.match || "");
-    if (!cardMatchNumber)
+    if (card.dataset.match == null)
         return;
     showCardBack(card);
     choosenCards.push(card);
     if (choosenCards.length === 2) {
         if (choosenCards[0]?.dataset.match === choosenCards[1]?.dataset.match) {
-            console.log("It's a match!");
             await pause(TIME_TO_SHOW_CARDS);
-            hideMatchedCards(choosenCards);
+            removeCardsAnimation(choosenCards);
+            await hideMatchedCards(choosenCards);
         }
         else {
             await pause(TIME_TO_SHOW_CARDS);
             resetCards(choosenCards);
         }
+        checkIfGameOver();
         choosenCards.length = 0;
     }
 };
@@ -113,10 +115,29 @@ const resetCards = (cards) => {
         card.classList.remove("animate-flip-card");
     });
 };
-const hideMatchedCards = (choosenCards) => {
-    choosenCards.forEach(async (card) => {
-        card.classList.add("hide-matched-card");
-        await pause(1000);
+const hideMatchedCards = async (choosenCards) => {
+    for (const card of choosenCards) {
+        await pause(500);
         card.remove();
+    }
+};
+const removeCardsAnimation = (choosenCards) => {
+    choosenCards.forEach((card) => {
+        card.classList.add("hide-matched-card");
+    });
+};
+const checkIfGameOver = () => {
+    const remainingCards = document.querySelectorAll(".card");
+    if (remainingCards.length === 0) {
+        console.log("Game Over! All cards matched.");
+    }
+};
+const giveCardsImages = (cardsArr, category = "animals") => {
+    cardsArr.forEach((card) => {
+        const matchNumber = parseInt(card.dataset.match || "0");
+        const img = card.querySelector("img");
+        if (!img)
+            return;
+        img.src = categories[category]?.[matchNumber] ?? "";
     });
 };

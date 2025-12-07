@@ -14,7 +14,8 @@
 	transition: transform 0.4s;
 }
 .hide-matched-card {
-	animation: hideMatchedCard 0.8s ease-in-out forwards;
+	opacity: 0;
+	transition: opacity 0.3s ease-in-out;
 }
 
 @keyframes zoom {
@@ -26,15 +27,5 @@
 	}
 	100% {
 		transform: scale(1);
-	}
-}
-@keyframes hideMatchedCard {
-	50% {
-		top: -4rem;
-		opacity: 1;
-	}
-	100% {
-		top: -4rem;
-		opacity: 0;
 	}
 }

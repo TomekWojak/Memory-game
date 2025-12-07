@@ -1,5 +1,7 @@
 import { pause } from "./helpers.js";
-const TIME_TO_SHOW_CARDS = 1500;
+import { categories } from "./categories.js";
+
+const TIME_TO_SHOW_CARDS = 500;
 interface CardPosition {
 	top: string;
 	left: string;
@@ -18,20 +20,20 @@ const getCardsPositions = (): CardPosition[] => {
 };
 
 document.addEventListener("DOMContentLoaded", function (): void {
-	const startButton = document.querySelector<HTMLElement>(".start-game-btn");
+	const startButton =
+		document.querySelector<HTMLButtonElement>(".start-game-btn");
 	const cards = [...document.querySelectorAll<HTMLElement>(".card")];
 	const positions = getCardsPositions();
 	const choosenCards: HTMLElement[] = [];
-	let lastClickedCard: HTMLElement;
 
 	if (!startButton) return;
 	startButton.addEventListener("click", () => {
+		startButton.disabled = true;
 		startGame(positions, cards);
 	});
 	cards.forEach((card) => {
 		card.addEventListener("click", () => {
-			if (card === lastClickedCard || choosenCards.length === 2) return;
-			lastClickedCard = card;
+			if (choosenCards.includes(card) || choosenCards.length === 2) return;
 
 			handleMatch(card, choosenCards);
 		});
@@ -64,7 +66,9 @@ const startGame = async (
 
 	await pause(1000);
 	addAnimation(cards);
+
 	assignNumbersToCards(cards);
+	giveCardsImages(cards);
 };
 
 const moveCardsToOneTarget = (cards: HTMLElement[]) => {
@@ -87,7 +91,7 @@ const setNumbersRange = (cardsArr: HTMLElement[]) => {
 	let numbers: number[] = [];
 
 	let maxNumber = cardsArr.length / 2;
-	for (let i = 1; i <= maxNumber; i++) {
+	for (let i = 0; i < maxNumber; i++) {
 		numbers.push(i);
 	}
 	return numbers;
@@ -118,7 +122,7 @@ const showCardBack = (card: HTMLElement) => {
 const handleMatch = async (card: HTMLElement, choosenCards: HTMLElement[]) => {
 	const cardMatchNumber = parseInt(card.dataset.match || "");
 
-	if (!cardMatchNumber) return;
+	if (card.dataset.match == null) return;
 
 	showCardBack(card);
 
@@ -126,13 +130,14 @@ const handleMatch = async (card: HTMLElement, choosenCards: HTMLElement[]) => {
 
 	if (choosenCards.length === 2) {
 		if (choosenCards[0]?.dataset.match === choosenCards[1]?.dataset.match) {
-			console.log("It's a match!");
 			await pause(TIME_TO_SHOW_CARDS);
-			hideMatchedCards(choosenCards);
+			removeCardsAnimation(choosenCards);
+			await hideMatchedCards(choosenCards);
 		} else {
 			await pause(TIME_TO_SHOW_CARDS);
 			resetCards(choosenCards);
 		}
+		checkIfGameOver();
 		choosenCards.length = 0;
 	}
 };
@@ -142,10 +147,31 @@ const resetCards = (cards: HTMLElement[]) => {
 		card.classList.remove("animate-flip-card");
 	});
 };
-const hideMatchedCards = (choosenCards: HTMLElement[]) => {
-	choosenCards.forEach(async (card) => {
-		card.classList.add("hide-matched-card");
-		await pause(1000);
+const hideMatchedCards = async (choosenCards: HTMLElement[]) => {
+	for (const card of choosenCards) {
+		await pause(500);
 		card.remove();
+	}
+};
+const removeCardsAnimation = (choosenCards: HTMLElement[]) => {
+	choosenCards.forEach((card) => {
+		card.classList.add("hide-matched-card");
+	});
+};
+
+const checkIfGameOver = () => {
+	const remainingCards = document.querySelectorAll<HTMLElement>(".card");
+	if (remainingCards.length === 0) {
+		console.log("Game Over! All cards matched.");
+	}
+};
+
+const giveCardsImages = (cardsArr: HTMLElement[], category = "animals") => {
+	cardsArr.forEach((card) => {
+		const matchNumber = parseInt(card.dataset.match || "0");
+		const img = card.querySelector<HTMLImageElement>("img");
+		if (!img) return;
+
+		img.src = categories[category]?.[matchNumber] ?? "";
 	});
 };
