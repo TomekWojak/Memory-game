@@ -20,10 +20,20 @@ document.addEventListener("DOMContentLoaded", function (): void {
 	const startButton = document.querySelector<HTMLElement>(".start-game-btn");
 	const cards = [...document.querySelectorAll<HTMLElement>(".card")];
 	const positions = getCardsPositions();
+	const choosenCards: number[] = [];
+	let lastClickedCard: HTMLElement;
 
 	if (!startButton) return;
 	startButton.addEventListener("click", () => {
 		startGame(positions, cards);
+	});
+	cards.forEach((card) => {
+		card.addEventListener("click", () => {
+			if (card === lastClickedCard) return;
+			lastClickedCard = card;
+
+			handleMatch(card, choosenCards);
+		});
 	});
 });
 
@@ -43,7 +53,6 @@ const startGame = async (
 ) => {
 	const cards = cardsArr;
 
-	assignNumbersToCards(cards);
 	moveCardsToOneTarget(cards);
 
 	await pause(2000);
@@ -54,6 +63,7 @@ const startGame = async (
 
 	await pause(1000);
 	addAnimation(cards);
+	assignNumbersToCards(cards);
 };
 
 const moveCardsToOneTarget = (cards: HTMLElement[]) => {
@@ -98,4 +108,27 @@ const addAnimation = (cardsArr: HTMLElement[]) => {
 	cardsArr.forEach((card) => {
 		card.classList.toggle("animate-(--zoom)");
 	});
+};
+
+const showCardBack = (card: HTMLElement) => {
+	card.style.transform = "rotateY(180deg)";
+	card.style.transition = "transform 0.4s";
+};
+
+const handleMatch = (card: HTMLElement, choosenCards: number[]) => {
+	const cardMatchNumber = parseInt(card.dataset.match || "");
+
+	if (!cardMatchNumber) return;
+
+	showCardBack(card);
+	choosenCards.push(cardMatchNumber);
+
+	if (choosenCards.length === 2) {
+		if (choosenCards[0] === choosenCards[1]) {
+			console.log("It's a match!");
+		} else {
+			console.log("Not a match.");
+		}
+		choosenCards.length = 0;
+	}
 };

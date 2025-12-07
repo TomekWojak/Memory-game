@@ -12,10 +12,20 @@ document.addEventListener("DOMContentLoaded", function () {
     const startButton = document.querySelector(".start-game-btn");
     const cards = [...document.querySelectorAll(".card")];
     const positions = getCardsPositions();
+    const choosenCards = [];
+    let lastClickedCard;
     if (!startButton)
         return;
     startButton.addEventListener("click", () => {
         startGame(positions, cards);
+    });
+    cards.forEach((card) => {
+        card.addEventListener("click", () => {
+            if (card === lastClickedCard)
+                return;
+            lastClickedCard = card;
+            handleMatch(card, choosenCards);
+        });
     });
 });
 const shuffleCards = (array) => {
@@ -29,7 +39,6 @@ const shuffleCards = (array) => {
 };
 const startGame = async (positions, cardsArr) => {
     const cards = cardsArr;
-    assignNumbersToCards(cards);
     moveCardsToOneTarget(cards);
     await pause(2000);
     placeCardsOnBoard(cards, positions);
@@ -37,6 +46,7 @@ const startGame = async (positions, cardsArr) => {
     addAnimation(cards);
     await pause(1000);
     addAnimation(cards);
+    assignNumbersToCards(cards);
 };
 const moveCardsToOneTarget = (cards) => {
     cards.forEach((card) => {
@@ -74,4 +84,24 @@ const addAnimation = (cardsArr) => {
     cardsArr.forEach((card) => {
         card.classList.toggle("animate-(--zoom)");
     });
+};
+const showCardBack = (card) => {
+    card.style.transform = "rotateY(180deg)";
+    card.style.transition = "transform 0.4s";
+};
+const handleMatch = (card, choosenCards) => {
+    const cardMatchNumber = parseInt(card.dataset.match || "");
+    if (!cardMatchNumber)
+        return;
+    showCardBack(card);
+    choosenCards.push(cardMatchNumber);
+    if (choosenCards.length === 2) {
+        if (choosenCards[0] === choosenCards[1]) {
+            console.log("It's a match!");
+        }
+        else {
+            console.log("Not a match.");
+        }
+        choosenCards.length = 0;
+    }
 };
