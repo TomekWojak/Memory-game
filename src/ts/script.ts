@@ -1,4 +1,5 @@
 import { pause } from "./helpers.js";
+const TIME_TO_SHOW_CARDS = 1500;
 interface CardPosition {
 	top: string;
 	left: string;
@@ -20,7 +21,7 @@ document.addEventListener("DOMContentLoaded", function (): void {
 	const startButton = document.querySelector<HTMLElement>(".start-game-btn");
 	const cards = [...document.querySelectorAll<HTMLElement>(".card")];
 	const positions = getCardsPositions();
-	const choosenCards: number[] = [];
+	const choosenCards: HTMLElement[] = [];
 	let lastClickedCard: HTMLElement;
 
 	if (!startButton) return;
@@ -29,7 +30,7 @@ document.addEventListener("DOMContentLoaded", function (): void {
 	});
 	cards.forEach((card) => {
 		card.addEventListener("click", () => {
-			if (card === lastClickedCard) return;
+			if (card === lastClickedCard || choosenCards.length === 2) return;
 			lastClickedCard = card;
 
 			handleMatch(card, choosenCards);
@@ -111,24 +112,40 @@ const addAnimation = (cardsArr: HTMLElement[]) => {
 };
 
 const showCardBack = (card: HTMLElement) => {
-	card.style.transform = "rotateY(180deg)";
-	card.style.transition = "transform 0.4s";
+	card.classList.add("animate-flip-card");
 };
 
-const handleMatch = (card: HTMLElement, choosenCards: number[]) => {
+const handleMatch = async (card: HTMLElement, choosenCards: HTMLElement[]) => {
 	const cardMatchNumber = parseInt(card.dataset.match || "");
 
 	if (!cardMatchNumber) return;
 
 	showCardBack(card);
-	choosenCards.push(cardMatchNumber);
+
+	choosenCards.push(card);
 
 	if (choosenCards.length === 2) {
-		if (choosenCards[0] === choosenCards[1]) {
+		if (choosenCards[0]?.dataset.match === choosenCards[1]?.dataset.match) {
 			console.log("It's a match!");
+			await pause(TIME_TO_SHOW_CARDS);
+			hideMatchedCards(choosenCards);
 		} else {
-			console.log("Not a match.");
+			await pause(TIME_TO_SHOW_CARDS);
+			resetCards(choosenCards);
 		}
 		choosenCards.length = 0;
 	}
+};
+
+const resetCards = (cards: HTMLElement[]) => {
+	cards.forEach((card) => {
+		card.classList.remove("animate-flip-card");
+	});
+};
+const hideMatchedCards = (choosenCards: HTMLElement[]) => {
+	choosenCards.forEach(async (card) => {
+		card.classList.add("hide-matched-card");
+		await pause(1000);
+		card.remove();
+	});
 };

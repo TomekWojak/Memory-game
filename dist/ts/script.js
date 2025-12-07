@@ -1,4 +1,5 @@
 import { pause } from "./helpers.js";
+const TIME_TO_SHOW_CARDS = 1500;
 const getCardsPositions = () => {
     const cards = [...document.querySelectorAll(".card")].map((card) => {
         return {
@@ -21,7 +22,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
     cards.forEach((card) => {
         card.addEventListener("click", () => {
-            if (card === lastClickedCard)
+            if (card === lastClickedCard || choosenCards.length === 2)
                 return;
             lastClickedCard = card;
             handleMatch(card, choosenCards);
@@ -86,22 +87,36 @@ const addAnimation = (cardsArr) => {
     });
 };
 const showCardBack = (card) => {
-    card.style.transform = "rotateY(180deg)";
-    card.style.transition = "transform 0.4s";
+    card.classList.add("animate-flip-card");
 };
-const handleMatch = (card, choosenCards) => {
+const handleMatch = async (card, choosenCards) => {
     const cardMatchNumber = parseInt(card.dataset.match || "");
     if (!cardMatchNumber)
         return;
     showCardBack(card);
-    choosenCards.push(cardMatchNumber);
+    choosenCards.push(card);
     if (choosenCards.length === 2) {
-        if (choosenCards[0] === choosenCards[1]) {
+        if (choosenCards[0]?.dataset.match === choosenCards[1]?.dataset.match) {
             console.log("It's a match!");
+            await pause(TIME_TO_SHOW_CARDS);
+            hideMatchedCards(choosenCards);
         }
         else {
-            console.log("Not a match.");
+            await pause(TIME_TO_SHOW_CARDS);
+            resetCards(choosenCards);
         }
         choosenCards.length = 0;
     }
+};
+const resetCards = (cards) => {
+    cards.forEach((card) => {
+        card.classList.remove("animate-flip-card");
+    });
+};
+const hideMatchedCards = (choosenCards) => {
+    choosenCards.forEach(async (card) => {
+        card.classList.add("hide-matched-card");
+        await pause(1000);
+        card.remove();
+    });
 };

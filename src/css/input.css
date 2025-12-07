@@ -9,6 +9,14 @@
 	--accent: #3a1f4e;
 }
 
+.animate-flip-card {
+	transform: rotateY(180deg);
+	transition: transform 0.4s;
+}
+.hide-matched-card {
+	animation: hideMatchedCard 0.8s ease-in-out forwards;
+}
+
 @keyframes zoom {
 	0% {
 		transform: scale(1);
@@ -18,5 +26,15 @@
 	}
 	100% {
 		transform: scale(1);
+	}
+}
+@keyframes hideMatchedCard {
+	50% {
+		top: -4rem;
+		opacity: 1;
+	}
+	100% {
+		top: -4rem;
+		opacity: 0;
 	}
 }
