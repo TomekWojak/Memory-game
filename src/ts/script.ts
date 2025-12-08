@@ -2,6 +2,8 @@ import { pause } from "./helpers.js";
 import { categories } from "./categories.js";
 
 const TIME_TO_SHOW_CARDS = 500;
+let timerInterval: number;
+
 interface CardPosition {
 	top: string;
 	left: string;
@@ -23,18 +25,19 @@ document.addEventListener("DOMContentLoaded", function (): void {
 	const startButton =
 		document.querySelector<HTMLButtonElement>(".start-game-btn");
 	const cards = [...document.querySelectorAll<HTMLElement>(".card")];
+	const time = document.querySelector<HTMLElement>(".time");
 	const positions = getCardsPositions();
 	const choosenCards: HTMLElement[] = [];
 
-	if (!startButton) return;
+	if (!startButton || !time) return;
+
 	startButton.addEventListener("click", () => {
 		startButton.disabled = true;
-		startGame(positions, cards);
+		startGame(positions, cards, time);
 	});
 	cards.forEach((card) => {
 		card.addEventListener("click", () => {
 			if (choosenCards.includes(card) || choosenCards.length === 2) return;
-
 			handleMatch(card, choosenCards);
 		});
 	});
@@ -52,7 +55,8 @@ const shuffleCards = (array: CardPosition[]) => {
 
 const startGame = async (
 	positions: CardPosition[],
-	cardsArr: HTMLElement[]
+	cardsArr: HTMLElement[],
+	time: HTMLElement
 ) => {
 	const cards = cardsArr;
 
@@ -69,6 +73,7 @@ const startGame = async (
 
 	assignNumbersToCards(cards);
 	giveCardsImages(cards);
+	countUpTimer(time);
 };
 
 const moveCardsToOneTarget = (cards: HTMLElement[]) => {
@@ -120,8 +125,6 @@ const showCardBack = (card: HTMLElement) => {
 };
 
 const handleMatch = async (card: HTMLElement, choosenCards: HTMLElement[]) => {
-	const cardMatchNumber = parseInt(card.dataset.match || "");
-
 	if (card.dataset.match == null) return;
 
 	showCardBack(card);
@@ -174,4 +177,23 @@ const giveCardsImages = (cardsArr: HTMLElement[], category = "animals") => {
 
 		img.src = categories[category]?.[matchNumber] ?? "";
 	});
+};
+
+const countUpTimer = (time: HTMLElement) => {
+	let secondsCount = 0;
+	let minutesCount = 0;
+	const minutes = time.querySelector<HTMLElement>(".minutes");
+	const seconds = time.querySelector<HTMLElement>(".seconds");
+
+	if (!minutes || !seconds) return;
+
+	timerInterval = setInterval(() => {
+		secondsCount++;
+		if (secondsCount === 60) {
+			minutesCount++;
+			secondsCount = 0;
+		}
+		seconds.textContent = String(secondsCount).padStart(2, "0");
+		minutes.textContent = String(minutesCount).padStart(2, "0");
+	}, 1000);
 };

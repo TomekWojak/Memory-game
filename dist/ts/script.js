@@ -1,6 +1,7 @@
 import { pause } from "./helpers.js";
 import { categories } from "./categories.js";
 const TIME_TO_SHOW_CARDS = 500;
+let timerInterval;
 const getCardsPositions = () => {
     const cards = [...document.querySelectorAll(".card")].map((card) => {
         return {
@@ -13,13 +14,14 @@ const getCardsPositions = () => {
 document.addEventListener("DOMContentLoaded", function () {
     const startButton = document.querySelector(".start-game-btn");
     const cards = [...document.querySelectorAll(".card")];
+    const time = document.querySelector(".time");
     const positions = getCardsPositions();
     const choosenCards = [];
-    if (!startButton)
+    if (!startButton || !time)
         return;
     startButton.addEventListener("click", () => {
         startButton.disabled = true;
-        startGame(positions, cards);
+        startGame(positions, cards, time);
     });
     cards.forEach((card) => {
         card.addEventListener("click", () => {
@@ -38,7 +40,7 @@ const shuffleCards = (array) => {
     }
     return array;
 };
-const startGame = async (positions, cardsArr) => {
+const startGame = async (positions, cardsArr, time) => {
     const cards = cardsArr;
     moveCardsToOneTarget(cards);
     await pause(2000);
@@ -49,6 +51,7 @@ const startGame = async (positions, cardsArr) => {
     addAnimation(cards);
     assignNumbersToCards(cards);
     giveCardsImages(cards);
+    countUpTimer(time);
 };
 const moveCardsToOneTarget = (cards) => {
     cards.forEach((card) => {
@@ -91,7 +94,6 @@ const showCardBack = (card) => {
     card.classList.add("animate-flip-card");
 };
 const handleMatch = async (card, choosenCards) => {
-    const cardMatchNumber = parseInt(card.dataset.match || "");
     if (card.dataset.match == null)
         return;
     showCardBack(card);
@@ -140,4 +142,21 @@ const giveCardsImages = (cardsArr, category = "animals") => {
             return;
         img.src = categories[category]?.[matchNumber] ?? "";
     });
+};
+const countUpTimer = (time) => {
+    let secondsCount = 0;
+    let minutesCount = 0;
+    const minutes = time.querySelector(".minutes");
+    const seconds = time.querySelector(".seconds");
+    if (!minutes || !seconds)
+        return;
+    timerInterval = setInterval(() => {
+        secondsCount++;
+        if (secondsCount === 60) {
+            minutesCount++;
+            secondsCount = 0;
+        }
+        seconds.textContent = String(secondsCount).padStart(2, "0");
+        minutes.textContent = String(minutesCount).padStart(2, "0");
+    }, 1000);
 };
