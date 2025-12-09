@@ -257,6 +257,19 @@
         <p class="time p-4 flex text-white/70 text-lg">Czas <span class="minutes ml-auto">00</span>:<span
                 class="seconds">00</span>
         </p>
+        <div class="category-box p-4 group relative">
+            <button
+                class="category-select category w-full px-4 py-3 flex justify-between items-center bg-[#3FF0D9]/40 rounded-lg text-[#0C1F24] cursor-pointer border border-[#32D4BF]/30 hover:bg-[#32D4BF]/60 transition-colors">
+                <span class="selected-category pointer-events-none">Select category</span>
+                <img class="pointer-events-none" src="./src/images/chevron-down.svg" alt="">
+            </button>
+            <ul class="options absolute group-[.select-visible]:block hidden p-2 w-[calc(100%-32px)] left-1/2 -translate-x-1/2 top-0 translate-y-[55%] text-[#0C1F24] rounded-lg bg-[#3FF0D9]/40"
+                role="listbox">
+                <li role="option" class="p-2 hover:bg-white/10 cursor-pointer rounded-lg transition-colors">Animals</li>
+                <li role="option" class="p-2 hover:bg-white/10 cursor-pointer rounded-lg transition-colors">Cars</li>
+                <li role="option" class="p-2 hover:bg-white/10 cursor-pointer rounded-lg transition-colors">Fruits</li>
+            </ul>
+        </div>
         <div class="controls">
             <button
                 class="start-game-btn absolute bottom-5 left-1/2 -translate-x-1/2 w-1/2 bg-[#3FF0D9]/40 backdrop-blur-xl border border-[#32D4BF]/30 hover:bg-[#32D4BF]/60 text-[#0C1F24] transition-colors px-6 py-3 rounded-xl font-semibold cursor-pointer disabled:cursor-not-allowed disabled:bg-gray-400 disabled:border-gray-400 active:scale-98">Start

@@ -2,6 +2,7 @@ import { pause } from "./helpers.js";
 import { categories } from "./categories.js";
 const TIME_TO_SHOW_CARDS = 500;
 let timerInterval;
+const selectedCategory = document.querySelector(".selected-category");
 const getCardsPositions = () => {
     const cards = [...document.querySelectorAll(".card")].map((card) => {
         return {
@@ -13,11 +14,12 @@ const getCardsPositions = () => {
 };
 document.addEventListener("DOMContentLoaded", function () {
     const startButton = document.querySelector(".start-game-btn");
+    const categoryBox = document.querySelector(".category-box");
     const cards = [...document.querySelectorAll(".card")];
     const time = document.querySelector(".time");
     const positions = getCardsPositions();
     const choosenCards = [];
-    if (!startButton || !time)
+    if (!startButton || !time || !categoryBox)
         return;
     startButton.addEventListener("click", () => {
         startButton.disabled = true;
@@ -29,6 +31,16 @@ document.addEventListener("DOMContentLoaded", function () {
                 return;
             handleMatch(card, choosenCards);
         });
+    });
+    categoryBox.addEventListener("click", (e) => {
+        if (!(e.target instanceof HTMLElement))
+            return;
+        if (e.target.matches(".category-select")) {
+            showCategories();
+        }
+        else if (e.target.matches("li[role='option']")) {
+            changeCategory(e, cards);
+        }
     });
 });
 const shuffleCards = (array) => {
@@ -50,7 +62,7 @@ const startGame = async (positions, cardsArr, time) => {
     await pause(1000);
     addAnimation(cards);
     assignNumbersToCards(cards);
-    giveCardsImages(cards);
+    giveCardsImages(cards, selectedCategory?.textContent || "animals");
     countUpTimer(time);
 };
 const moveCardsToOneTarget = (cards) => {
@@ -134,13 +146,17 @@ const checkIfGameOver = () => {
         console.log("Game Over! All cards matched.");
     }
 };
-const giveCardsImages = (cardsArr, category = "animals") => {
+const giveCardsImages = (cardsArr, category) => {
     cardsArr.forEach((card) => {
         const matchNumber = parseInt(card.dataset.match || "0");
         const img = card.querySelector("img");
-        if (!img)
+        if (!img || !selectedCategory)
             return;
-        img.src = categories[category]?.[matchNumber] ?? "";
+        if (selectedCategory.textContent === "Select category") {
+            img.src = categories["animals"]?.[matchNumber] ?? "";
+            return;
+        }
+        img.src = categories[category.toLowerCase()]?.[matchNumber] ?? "";
     });
 };
 const countUpTimer = (time) => {
@@ -159,4 +175,16 @@ const countUpTimer = (time) => {
         seconds.textContent = String(secondsCount).padStart(2, "0");
         minutes.textContent = String(minutesCount).padStart(2, "0");
     }, 1000);
+};
+const changeCategory = (e, cards) => {
+    const category = e.target.textContent;
+    selectedCategory.textContent = category || "Selected category";
+    showCategories();
+    giveCardsImages(cards, category);
+};
+const showCategories = () => {
+    const categoryBox = document.querySelector(".category-box");
+    if (!categoryBox)
+        return;
+    categoryBox.classList.toggle("select-visible");
 };

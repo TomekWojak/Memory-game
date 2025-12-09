@@ -3,7 +3,8 @@ import { categories } from "./categories.js";
 
 const TIME_TO_SHOW_CARDS = 500;
 let timerInterval: number;
-
+const selectedCategory =
+	document.querySelector<HTMLElement>(".selected-category");
 interface CardPosition {
 	top: string;
 	left: string;
@@ -24,12 +25,13 @@ const getCardsPositions = (): CardPosition[] => {
 document.addEventListener("DOMContentLoaded", function (): void {
 	const startButton =
 		document.querySelector<HTMLButtonElement>(".start-game-btn");
+	const categoryBox = document.querySelector<HTMLElement>(".category-box");
 	const cards = [...document.querySelectorAll<HTMLElement>(".card")];
 	const time = document.querySelector<HTMLElement>(".time");
 	const positions = getCardsPositions();
 	const choosenCards: HTMLElement[] = [];
 
-	if (!startButton || !time) return;
+	if (!startButton || !time || !categoryBox) return;
 
 	startButton.addEventListener("click", () => {
 		startButton.disabled = true;
@@ -40,6 +42,15 @@ document.addEventListener("DOMContentLoaded", function (): void {
 			if (choosenCards.includes(card) || choosenCards.length === 2) return;
 			handleMatch(card, choosenCards);
 		});
+	});
+	categoryBox.addEventListener("click", (e: MouseEvent) => {
+		if (!(e.target instanceof HTMLElement)) return;
+
+		if (e.target.matches(".category-select")) {
+			showCategories();
+		} else if (e.target.matches("li[role='option']")) {
+			changeCategory(e, cards);
+		}
 	});
 });
 
@@ -72,7 +83,7 @@ const startGame = async (
 	addAnimation(cards);
 
 	assignNumbersToCards(cards);
-	giveCardsImages(cards);
+	giveCardsImages(cards, selectedCategory?.textContent || "animals");
 	countUpTimer(time);
 };
 
@@ -169,13 +180,19 @@ const checkIfGameOver = () => {
 	}
 };
 
-const giveCardsImages = (cardsArr: HTMLElement[], category = "animals") => {
+const giveCardsImages = (cardsArr: HTMLElement[], category: string) => {
 	cardsArr.forEach((card) => {
 		const matchNumber = parseInt(card.dataset.match || "0");
 		const img = card.querySelector<HTMLImageElement>("img");
-		if (!img) return;
+		if (!img || !selectedCategory) return;
 
-		img.src = categories[category]?.[matchNumber] ?? "";
+		if (selectedCategory.textContent === "Select category") {
+			img.src = categories["animals"]?.[matchNumber] ?? "";
+
+			return;
+		}
+
+		img.src = categories[category.toLowerCase()]?.[matchNumber] ?? "";
 	});
 };
 
@@ -196,4 +213,16 @@ const countUpTimer = (time: HTMLElement) => {
 		seconds.textContent = String(secondsCount).padStart(2, "0");
 		minutes.textContent = String(minutesCount).padStart(2, "0");
 	}, 1000);
+};
+
+const changeCategory = (e: MouseEvent, cards: HTMLElement[]) => {
+	const category = (e.target as HTMLElement).textContent;
+	selectedCategory!.textContent = category || "Selected category";
+	showCategories();
+	giveCardsImages(cards, category);
+};
+const showCategories = () => {
+	const categoryBox = document.querySelector<HTMLElement>(".category-box");
+	if (!categoryBox) return;
+	categoryBox.classList.toggle("select-visible");
 };
