@@ -11,4 +11,16 @@ export const categories = {
         "./src/images/animals/lizard-svgrepo-com.svg",
         "./src/images/animals/snake-svgrepo-com.svg",
     ],
+    fruits: [
+        "./src/images/fruits/apple-svgrepo-com.svg",
+        "./src/images/fruits/banana-svgrepo-com.svg",
+        "./src/images/fruits/mango-svgrepo-com.svg",
+        "./src/images/fruits/orange-svgrepo-com.svg",
+        "./src/images/fruits/strawberry-svgrepo-com.svg",
+        "./src/images/fruits/peach-svgrepo-com.svg",
+        "./src/images/fruits/plum-svgrepo-com.svg",
+        "./src/images/fruits/dragon-fruit-svgrepo-com.svg",
+        "./src/images/fruits/kiwi-fruit-svgrepo-com.svg",
+        "./src/images/fruits/pear-svgrepo-com.svg",
+    ],
 };
